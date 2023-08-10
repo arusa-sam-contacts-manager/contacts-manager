@@ -1,4 +1,9 @@
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 
 public class ContactsApp {
     private static final Scanner scanner = new Scanner(System.in);
@@ -32,6 +37,28 @@ public class ContactsApp {
 
                 default:
                     System.out.println("Invalid choice.");
+            }
+
+            Path p = Paths.get("data/info.txt");
+
+            List<String> newNames = new ArrayList<>();
+            newNames.add("Isaac");
+            newNames.add("Boofy");
+            newNames.add("John");
+            newNames.add("Bob Ross");
+            newNames.add("Steve");
+            newNames.add("Billie");
+
+            try {
+                Set<String> existingNames = new HashSet<>(Files.readAllLines(p));
+                for (String name : newNames) {
+                    if (!existingNames.contains(name)) {
+                        Files.write(p, Collections.singletonList(name), StandardOpenOption.APPEND);
+                        existingNames.add(name);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -88,6 +115,9 @@ public class ContactsApp {
         scanner.close();
         System.exit(0);
     }
+
+
+
 }
 
 
