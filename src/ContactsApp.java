@@ -1,59 +1,33 @@
 import java.util.Scanner;
 
 public class ContactsApp {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final ContactsManager manager = new ContactsManager();
+
     public static void main(String[] args) {
-        ContactsManager manager = new ContactsManager();
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
-            System.out.println("Contacts Manager:");
-            System.out.println("1. Show all contacts");
-            System.out.println("2. Add a new contact");
-            System.out.println("3. Search contacts by name");
-            System.out.println("4. Delete a contact");
-            System.out.println("5. Exit");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            showMenu();
+            int choice = getChoice();
 
             switch (choice) {
                 case 1:
-                    for (Contact contact : manager.getAllContacts()) {
-                        System.out.println("Name: " + contact.getName() + ", Number: " + contact.getNumber());
-                    }
+                    showAllContacts();
                     break;
 
                 case 2:
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter number: ");
-                    String number = scanner.nextLine();
-                    manager.addContact(new Contact(name, number));
-                    System.out.println("Contact added.");
+                    addNewContact();
                     break;
 
                 case 3:
-                    System.out.print("Enter name to search: ");
-                    String searchName = scanner.nextLine();
-                    Contact foundContact = manager.searchContactByName(searchName);
-                    if (foundContact != null) {
-                        System.out.println("Contact found - Name: " + foundContact.getName() + ", Number: " + foundContact.getNumber());
-                    } else {
-                        System.out.println("Contact not found.");
-                    }
+                    searchContactsByName();
                     break;
 
                 case 4:
-                    System.out.print("Enter name to delete: ");
-                    String deleteName = scanner.nextLine();
-                    manager.deleteContact(deleteName);
-                    System.out.println("Contact deleted.");
+                    deleteContact();
                     break;
 
                 case 5:
-                    System.out.println("Exiting...");
-                    scanner.close();
-                    System.exit(0);
+                    exit();
                     break;
 
                 default:
@@ -61,5 +35,62 @@ public class ContactsApp {
             }
         }
     }
+
+    private static void showMenu() {
+        System.out.println("Contacts Manager:");
+        System.out.println("1. Show all contacts");
+        System.out.println("2. Add a new contact");
+        System.out.println("3. Search contacts by name");
+        System.out.println("4. Delete a contact");
+        System.out.println("5. Exit");
+    }
+
+    private static int getChoice() {
+        System.out.print("Enter your choice: ");
+        return scanner.nextInt();
+    }
+
+    private static void showAllContacts() {
+        for (Contact contact : manager.getAllContacts()) {
+            System.out.println("Name: " + contact.getName() + ", Number: " + contact.getNumber());
+        }
+    }
+
+    private static void addNewContact() {
+        System.out.print("Enter name: ");
+        String name = scanner.next();
+        System.out.print("Enter number: ");
+        String number = scanner.next();
+        manager.addContact(new Contact(name, number));
+        System.out.println("Contact added.");
+    }
+
+    private static void searchContactsByName() {
+        System.out.print("Enter name to search: ");
+        String searchName = scanner.next();
+        Contact foundContact = manager.searchContactByName(searchName);
+        if (foundContact != null) {
+            System.out.println("Contact found - Name: " + foundContact.getName() + ", Number: " + foundContact.getNumber());
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
+
+    private static void deleteContact() {
+        System.out.print("Enter name to delete: ");
+        String deleteName = scanner.next();
+        manager.deleteContact(deleteName);
+        System.out.println("Contact deleted.");
+    }
+
+    private static void exit() {
+        System.out.println("Exiting Contacts ...");
+        scanner.close();
+        System.exit(0);
+    }
 }
+
+
+
+
 
