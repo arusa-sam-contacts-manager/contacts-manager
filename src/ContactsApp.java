@@ -50,11 +50,19 @@ public class ContactsApp {
         return scanner.nextInt();
     }
 
-    private static void showAllContacts() {
-        for (Contact contact : manager.getAllContacts()) {
-            System.out.println("Name: " + contact.getName() + ", Number: " + contact.getNumber());
-        }
+//    private static void showAllContacts() {
+//        for (Contact contact : manager.getAllContacts()) {
+//            System.out.println("Name: " + contact.getName() + ", Number: " + contact.getNumber());
+//        }
+//    }
+private static void showAllContacts() {
+    System.out.println("Name           | Phone number ");
+    System.out.println("-----------------------------");
+    for (Contact contact : manager.getAllContacts()) {
+        System.out.printf("%-15s | %-12s%n", contact.getName(), contact.getNumber());
     }
+}
+
 
     private static void addNewContact() {
         System.out.print("Enter name: ");
@@ -64,15 +72,6 @@ public class ContactsApp {
         manager.addContact(name, number);
         System.out.println("Contact added: " + manager.searchContactByName(name));
     }
-
-//    private static void addNewContact() {
-//        System.out.print("Enter name: ");
-//        String name = scanner.next();
-//        System.out.print("Enter number: ");
-//        String number = scanner.next();
-//        manager.addContact(new Contact(name, number));
-//        System.out.println("Contact added.");
-//    }
 
     private static void searchContactsByName() {
         System.out.print("Enter name to search: ");
@@ -101,6 +100,7 @@ public class ContactsApp {
 
 
 }
+
 
 
 
