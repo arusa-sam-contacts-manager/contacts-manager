@@ -64,13 +64,38 @@ private static void showAllContacts() {
 }
 
 
+    private static String formatPhoneNumber(String number) {
+        // Remove any non-digit characters from the input
+        String digits = number.replaceAll("\\D", "");
+
+        // Check if the number is of valid length (7 or 10 digits)
+        if (digits.length() == 7) {
+            return digits.substring(0, 3) + "-" + digits.substring(3);
+        } else if (digits.length() == 10) {
+            return "(" + digits.substring(0, 3) + ") " + digits.substring(3, 6) + "-" + digits.substring(6);
+        } else {
+            return "Invalid phone number length";
+        }
+    }
+
+
+
     private static void addNewContact() {
         System.out.print("Enter name: ");
         String name = scanner.next();
         System.out.print("Enter number: ");
         String number = scanner.next();
-        manager.addContact(name, number);
+
+
+        String formattedNumber = formatPhoneNumber(number);
+
+        manager.addContact(name, formattedNumber);
         System.out.println("Contact added: " + manager.searchContactByName(name));
+
+
+
+//        manager.addContact(name, number);
+//        System.out.println("Contact added: " + manager.searchContactByName(name));
     }
 
     private static void searchContactsByName() {
