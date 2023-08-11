@@ -1,8 +1,3 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class ContactsApp {
@@ -38,28 +33,6 @@ public class ContactsApp {
                 default:
                     System.out.println("Invalid choice.");
             }
-
-            Path p = Paths.get("data/info.txt");
-
-            List<String> newNames = new ArrayList<>();
-            newNames.add("Isaac");
-            newNames.add("Boofy");
-            newNames.add("John");
-            newNames.add("Bob Ross");
-            newNames.add("Steve");
-            newNames.add("Billie");
-
-            try {
-                Set<String> existingNames = new HashSet<>(Files.readAllLines(p));
-                for (String name : newNames) {
-                    if (!existingNames.contains(name)) {
-                        Files.write(p, Collections.singletonList(name), StandardOpenOption.APPEND);
-                        existingNames.add(name);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -88,9 +61,18 @@ public class ContactsApp {
         String name = scanner.next();
         System.out.print("Enter number: ");
         String number = scanner.next();
-        manager.addContact(new Contact(name, number));
-        System.out.println("Contact added.");
+        manager.addContact(name, number);
+        System.out.println("Contact added: " + manager.searchContactByName(name));
     }
+
+//    private static void addNewContact() {
+//        System.out.print("Enter name: ");
+//        String name = scanner.next();
+//        System.out.print("Enter number: ");
+//        String number = scanner.next();
+//        manager.addContact(new Contact(name, number));
+//        System.out.println("Contact added.");
+//    }
 
     private static void searchContactsByName() {
         System.out.print("Enter name to search: ");
