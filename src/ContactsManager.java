@@ -57,7 +57,6 @@ public class ContactsManager {
                 }
             }
         } catch (IOException e) {
-            // It's okay if the file doesn't exist initially or there's an error reading it.
         }
     }
 }
