@@ -1,3 +1,6 @@
+
+////construct new object and add it to an array list to hold contact object and then convert contact to string
+
 public class Contact {
     private String name;
     private String number;
@@ -14,4 +17,10 @@ public class Contact {
     public String getNumber() {
         return number;
     }
+
+    public String toString() {
+        return "Name: " + name + ", Number: " + number;
+    }
 }
+
+
