@@ -1,6 +1,3 @@
-
-////construct new object and add it to an array list to hold contact object and then convert contact to string
-
 public class Contact {
     private String name;
     private String number;

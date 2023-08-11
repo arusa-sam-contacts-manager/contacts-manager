@@ -50,14 +50,9 @@ public class ContactsApp {
         return scanner.nextInt();
     }
 
-//    private static void showAllContacts() {
-//        for (Contact contact : manager.getAllContacts()) {
-//            System.out.println("Name: " + contact.getName() + ", Number: " + contact.getNumber());
-//        }
-//    }
-private static void showAllContacts() {
-    System.out.println("Name           | Phone number ");
-    System.out.println("-----------------------------");
+    private static void showAllContacts() {
+    System.out.println("Name            | Phone number ");
+    System.out.println("--------------------------------");
     for (Contact contact : manager.getAllContacts()) {
         System.out.printf("%-15s | %-12s%n", contact.getName(), contact.getNumber());
     }
